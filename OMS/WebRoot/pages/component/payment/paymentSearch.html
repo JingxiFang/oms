@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="ie6 ie"><![endif]-->
+<!--[if IE 7]><html class="ie7 ie"><![endif]-->
+<!--[if IE 8]><html class="ie8 ie"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="ja" class="">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<!--script frontend-->
+<script type="text/javascript"
+	src="../../../js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/lib/jquery_plugin/bs/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/lib/jquery_plugin/placeholder/jquery.placeholder.js"></script>
+<script type="text/javascript"
+	src="../../../js/lib/jquery_plugin/ui/jquery-ui.js"></script>
+<script type="text/javascript" src="../../../js/common/popup.js"></script>
+<link id="icon" href="../../../images/s.ico" rel="icon">
+<!--script 〓system-->
+
+<!--styles common-->
+<link href="../../../js/lib/jquery_plugin/bs/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="../../../js/lib/jquery_plugin/bs/css/bootstrap-responsive.css"
+	rel="stylesheet" type="text/css">
+<link href="../../../js/lib/jquery_plugin/ui/jquery-ui.css"
+	rel="stylesheet" type="text/css">
+<link href="../../../css/common/bootstrap_setup.css" rel="stylesheet"
+	type="text/css">
+<link href="../../../css/common/common.css" rel="stylesheet"
+	type="text/css">
+<link href="../../../css/common/popup.css" rel="stylesheet"
+	type="text/css">
+
+<script type="text/javascript">
+	var flag = true;
+	$(function() {
+		$(document).on('click', '.sort', function(e) {
+			if ($(this).find('span')[0] == null) {
+				flag = false;
+			}
+			$('.caret').remove();
+			var sor = $('<span class="' + (flag ? 'caret up' : 'caret') + '"></span>')
+			$(this).append(sor);
+			flag = !flag;
+		});
+
+		$('#clear_input').bind('click', function(e) {
+			$('#search_table').find('input').val('');
+			$('#person').val('1');
+		});
+		$('#search_result td').on('dblclick', function(e) {
+			window.location = "paymentInsert.html";
+		});
+		$('#search_result td').on('click', function(e) {
+			$('.row-select').removeClass('row-select');
+			$(this).parent().addClass('row-select');
+		});
+
+		/**
+		 * 客户类别“全选”选中时，其余项设定选中
+		 *
+		 * @private
+		 */
+		$(document).on("click", "#type_all", function() {
+			var check = this.checked;
+			$("input[name = 'item_type_list']").each(function() {
+				this.checked = check;
+				if (check){
+					$(this).parent().parent().addClass('table-row-selected')
+				}else{
+					$(this).parent().parent().removeClass('table-row-selected');
+				}
+			});
+		});
+
+		/**
+		 * 客户类别“全选”外其余项选中全部选中时，设定“全选”为选中状态
+		 *
+		 * @private
+		 */
+		$(document).on("click", "input[name = 'item_type_list']", function() {
+			if (this.checked){
+				$(this).parent().parent().addClass('table-row-selected');
+			}else{
+				$(this).parent().parent().removeClass('table-row-selected');
+			}
+			var $subBox = $("input[name = 'item_type_list']");
+			var length = $("input[name = 'item_type_list']:checked").length;
+			$("#type_all")[0].checked = ($subBox.length == length) ? true : false;
+		});
+
+
+		/**
+		 * 回款状态“全选”选中时，其余项设定选中
+		 *
+		 * @private
+		 */
+		$(document).on("click", "#back_section_end_all", function() {
+			var check = this.checked;
+			$("input[name = 'back_section_end']").each(function() {
+				this.checked = check;
+				if (check){
+					$(this).parent().parent().addClass('table-row-selected')
+				}else{
+					$(this).parent().parent().removeClass('table-row-selected');
+				}
+			});
+		});
+
+		/**
+		 * 回款状态“全选”外其余项选中全部选中时，设定“全选”为选中状态
+		 *
+		 * @private
+		 */
+		$(document).on("click", "input[name = 'back_section_end']", function() {
+			if (this.checked){
+				$(this).parent().parent().addClass('table-row-selected');
+			}else{
+				$(this).parent().parent().removeClass('table-row-selected');
+			}
+			var $subBox = $("input[name = 'back_section_end']");
+			var length = $("input[name = 'back_section_end']:checked").length;
+			$("#back_section_end_all")[0].checked = ($subBox.length == length) ? true : false;
+		});
+	});
+
+</script>
+
+</head>
+<body>
+	<!--▼▼▼header▼▼▼-->
+	<header>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<div class="container">
+					<button data-target=".nav-collapse" data-toggle="collapse"
+						class="btn btn-navbar" type="button">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<!--logo-->
+					<ul class="nav nav-pills logo">
+						<li><a class="logo" href="../../menu/mainMenuG.html"
+							style="padding: 0px;"> <img alt=""
+								src="../../../images/logo.png"><span
+								style="padding-left: 10px; padding-top: 10px; padding-bottom: 5px; color: #EEEEEE; font-size: 23px; font-weight: bold; vertical-align: middle;">订单管理系统</span>
+						</a></li>
+					</ul>
+					<!--navi-->
+					<div class="nav-collapse collapse">
+						<ul class="nav pull-right user">
+							<li class="dropdown"><a data-toggle="dropdown"
+								class="dropdown-toggle" href="#"> <i
+									class="icon-user icon-white unit"></i>张三<b class="caret"></b>
+							</a>
+								<ul class="dropdown-menu" style="z-index: 1000000;">
+									<li><a href="../../common/resetPassword.html">修改密码</a></li>
+									<li class="divider"></li>
+									<li><a href="../../login.html">退出系统</a></li>
+								</ul></li>
+							<li class="" style="border-left-width: 0px;"><a class=""
+								style="border-left-width: 0px;" data-toggle="dropdown" href="#">
+									<span class="label label-info"
+									style="background: #4f81bd; padding: 3px 4px; width: 30px; height: 14px; text-align: center; border-radius: 10px; font-size: 13px;">管理</span>
+							</a></li>
+						</ul>
+						<ul class="nav pull-right navi">
+							<li class=""><a href="../../menu/mainMenuG.html">返回主菜单</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--▼▼▼search▼▼▼-->
+	<div class="container-fluid search disabled">
+		<div class="row-fluid"></div>
+	</div>
+	<!--▼▼▼contents(field type)▼▼▼-->
+	<div class="main">
+		<div class="banner">
+			<span>实际回款查询/录入</span>
+		</div>
+		<div class="content">
+			<!-- search-table -->
+			<div class="search-table" id="search_table">
+				<span
+					style="background-color: #FFFFFF; font-size: 14px; left: 10px; position: relative; top: 9px;">&nbsp;查询条件&nbsp;</span>
+				<div
+					style="padding: 10px; border-width: 1px 0; border-style: solid; border-color: #0088CC;">
+					<table class="table-edit" style="width: 90%; margin: 0 auto;">
+						<tr>
+							<td style="width: 100px" class="right_align">
+								合同号&nbsp;:
+							</td>
+							<td style="width: 260px">
+								<input class="input-xlarge" type="text"
+									style="width: 160px; text-align: left; ime-mode: disabled"
+									value="">
+							</td>
+							<td style="width: 100px" class="right_align">
+								业务员&nbsp;:
+							</td>
+							<td style="width: 260px">
+								<input class="input-xlarge" type="text"
+									style="width: 160px; text-align: left;"
+									value="">
+							</td>
+						</tr>
+						<tr>
+							<td class="right_align">
+								客户名称&nbsp;:
+							</td>
+							<td>
+								<input class="input-xlarge" type="text"
+									style="width: 220px; text-align: left;"
+									value="">
+							</td>
+							<td class="right_align">
+								项目名称&nbsp;:
+							</td>
+							<td style="width: 260px">
+								<input class="input-xlarge" type="text"
+									style="width: 220px; text-align: left;"
+									value="">
+							</td>
+						</tr>
+						<tr>
+							<td class="right_align">
+								客户类别&nbsp;:
+							</td>
+							<td>
+								<label class="checkbox inline">
+									<input id="type_all" type="checkbox" id="type_all" name="type_all" value="ALL" checked>
+									<span class="input-label">全部</span>
+								</label>
+								<label class="checkbox inline">
+									<input id="type_1" type="checkbox" id="type_1" name="item_type_list" value="type_1" checked>
+									<span class="input-label">国网</span>
+								</label>
+								<label class="checkbox inline">
+									<input id="type_2" type="checkbox" id="type_2" name="item_type_list" value="type_2" checked>
+									<span class="input-label">南网</span>
+								</label>
+								<label class="checkbox inline">
+									<input id="type_3" type="checkbox" id="type_3" name="item_type_list" value="type_3" checked>
+									<span class="input-label">地方</span>
+								</label>
+								<label class="checkbox inline">
+									<input id="type_4" type="checkbox" id="type_4" name="item_type_list" value="type_4" checked>
+									<span class="input-label">海外</span>
+								</label>
+							</td>
+							<td class="right_align">
+								回款状态&nbsp;:
+							</td>
+							<td>
+								<label class="checkbox inline">
+									<input id="back_section_end_all" type="checkbox" id="back_section_end_all" name="back_section_end_all" value="ALL">
+									<span class="input-label">全部</span>
+								</label>
+								<label class="checkbox inline">
+									<input id="back_section_end_F" type="checkbox" id="back_section_end_F" name="back_section_end" value="F" checked>
+									<span class="input-label">未结束</span>
+								</label>
+								<label class="checkbox inline">
+									<input id="back_section_end_T" type="checkbox" id="back_section_end_T" name="back_section_end" value="T">
+									<span class="input-label">结束</span>
+								</label>
+							</td>
+
+						</tr>
+					</table>
+					<div class="search-foot-btn">
+						<a class="btn btn-warning btn-small" id="clear_input">重置</a>
+						<a class="btn btn-success btn-small-aft" id="search">查询</a>
+					</div>
+				</div>
+			</div>
+			<!-- search-table -->
+			<!-- search-result -->
+			<div class="search-result">
+				<div id="search_result" style="padding: 10px;">
+					<table class="table table-striped table-bordered"
+						style="background-color: #E4F4CB;">
+						<thead>
+							<tr>
+								<th style="width: 8%; height: 21px;">
+									<a class="sort">业务员</a>
+									<span class="caret"></span>
+								</th>
+								<th style="width: 15%"><a class="sort">合同号</a></th>
+								<th style="width: 20%"><a class="sort">客户名称</a></th>
+								<th style="width: 20%"><a class="sort">项目名称</a></th>
+								<th style="width: 12%"><a class="sort">合同总价</a></th>
+								<th style="width: 12%"><a class="sort">已回款总额</a></th>
+								<th style="width: 8%"><a class="sort">回款状态</a></th>
+								<th style="width: 5%"></th>
+							</tr>
+						</thead>
+						<tbody id="search_tbody">
+
+							<tr>
+								<td>○○</td>
+								<td>ABC000000006</td>
+								<td>某市国家电网分公司</td>
+								<td>某项目一期</td>
+								<td class="right_align">999,111.00</td>
+								<td class="right_align">900,000.00</td>
+								<td class="center_td">
+									未结束
+								</td>
+								<td class="center_td">
+									<a class="icon icon-edit" title="录入回款信息"  onclick="window.location='paymentInsert.html'"></a>
+								</td>
+							</tr>
+							<tr>
+								<td>○○</td>
+								<td>ABC000000005</td>
+								<td>某市国家电网分公司</td>
+								<td>某项目一期</td>
+								<td class="right_align">999,111.00</td>
+								<td class="right_align">900,000.00</td>
+								<td class="center_td">
+									未结束
+								</td>
+								<td class="center_td">
+									<a class="icon icon-edit" title="录入回款信息"  onclick="window.location='paymentInsert.html'"></a>
+								</td>
+							</tr>
+							<tr>
+								<td>○○</td>
+								<td>ABC000000004</td>
+								<td>某市国家电网分公司</td>
+								<td>某项目一期</td>
+								<td class="right_align">999,111.00</td>
+								<td class="right_align">900,000.00</td>
+								<td class="center_td">
+									未结束
+								</td>
+								<td class="center_td">
+									<a class="icon icon-edit" title="录入回款信息"  onclick="window.location='paymentInsert.html'"></a>
+								</td>
+							</tr>
+							<tr>
+								<td>○○</td>
+								<td>ABC000000003</td>
+								<td>某市国家电网分公司</td>
+								<td>某项目一期</td>
+								<td class="right_align">999,111.00</td>
+								<td class="right_align">900,000.00</td>
+								<td class="center_td">
+									未结束
+								</td>
+								<td class="center_td">
+									<a class="icon icon-edit" title="录入回款信息"  onclick="window.location='paymentInsert.html'"></a>
+								</td>
+							</tr>
+							<tr>
+								<td>○○</td>
+								<td>ABC000000002</td>
+								<td>某市国家电网分公司</td>
+								<td>某项目一期</td>
+								<td class="right_align">999,111.00</td>
+								<td class="right_align">900,000.00</td>
+								<td class="center_td">
+									未结束
+								</td>
+								<td class="center_td">
+									<a class="icon icon-edit" title="录入回款信息"  onclick="window.location='paymentInsert.html'"></a>
+								</td>
+							</tr>
+							<tr>
+								<td>○○</td>
+								<td>ABC000000001</td>
+								<td>某市国家电网分公司</td>
+								<td>某项目一期</td>
+								<td class="right_align">999,111.00</td>
+								<td class="right_align">900,000.00</td>
+								<td class="center_td">
+									未结束
+								</td>
+								<td class="center_td">
+									<a class="icon icon-edit" title="录入回款信息"  onclick="window.location='paymentInsert.html'"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="pagination" style="align: center;">
+					<div id='project_pagination' class="pagination pagination-centered">
+						<div class="pagination">
+							<ul>
+								<li class="disabled"><a href="#">«</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">»</a></li>
+							</ul>
+							<ul>
+								<li><span>(1-10/38)</span></li>
+								<li><span>显示条数：</span></li>
+							</ul>
+							<ul>
+								<li class="active"><a href="#">10</a></li>
+								<li class=""><a href="#">30</a></li>
+								<li class=""><a href="#">50</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom_block">
+			<div style="padding: 8px; text-align: center;">
+				<a class="btn btn-info btn-middle" style=""
+					href="../../menu/mainMenuG.html">返回主菜单</a>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

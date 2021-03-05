@@ -1,0 +1,44 @@
+<html>
+<head>
+<title></title>
+<script src="../jquery/jquery.min.js" type="text/javascript"></script>
+<script src="jquery.alerts.js" type="text/javascript"></script>
+<script src="../jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+<link href="jquery.alerts.css" rel="stylesheet">
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#btnConfirm").click(function (){
+			jConfirm('Can you confirm this?<br/><a href=\"http://www.cnblogs.com/whitewolf/\">–{Ž¦—á—ˆŽ©”j˜Q”Ž‹q</a>',
+					'Confirmation Dialog', function(r) {
+					jAlert('Confirmed: ' + r, 'Confirmation Results');
+			});
+		});
+
+		$("#btnAlert").click(function (){
+			jAlert('Pushed the alert button','Alert Dialog', function(r) {
+
+				alert("sssssss");
+
+			});
+			return;
+			alert("ssss33333");
+		});
+		$("#btnPrompt").click(function () {
+			jWarning('error', '','Warning Dialog', function (r) {});
+		});
+	});
+</script>
+</head>
+<body>
+	<form id="form1">
+		<div>
+		<a href="#" id="btnAlert"/>btnAlert</a>
+		<a href="#" id="btnPrompt"/>btnPrompt</a>
+		<a href="#" id="btnConfirm"/>ssssssssssss</a>
+		</div>
+		<div>
+			<p>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br>asdafsdagdfhdf<br></p>
+		</div>
+	</form>
+</body>
+</html>

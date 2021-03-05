@@ -1,0 +1,51 @@
+﻿  <div class="navbar navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+				<button data-target=".nav-collapse" data-toggle="collapse"
+					class="btn btn-navbar" type="button">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<!--logo-->
+				<ul class="nav nav-pills logo">
+					<li><a class="logo" href="<%=basePath%>loginAction?method=main"
+						style="padding: 0px;"> <img alt=""
+							src="../../../images/logo.png"><span
+							style="padding-left: 10px; padding-top: 10px; padding-bottom: 5px; color: #EEEEEE; font-size: 23px; font-weight: bold; vertical-align: middle;">订单管理系统</span>
+					</a></li>
+				</ul>
+				<!--navi-->
+				<div class="nav-collapse collapse">
+					<ul class="nav pull-right user">
+						<li class="dropdown"><a data-toggle="dropdown"
+							class="dropdown-toggle" href="#"> <i
+								class="icon-user icon-white unit"></i>${dto.user_nm}<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu" style="z-index: 1000000;">
+								<li><a href="<%=basePath%>pages/common/resetPassword.jsp">修改密码</a></li>
+								<li class="divider"></li>
+								<li><a href="<%=basePath%>loginAction?method=logout">退出系统</a></li>
+							</ul></li>
+						<li class="" style="border-left-width: 0px;">
+							<a class="" style="border-left-width: 0px;" data-toggle="dropdown" href="#">
+								<%if ("M".equals(dto.getUser_owner_flg())) {%>
+									<span class="label label-info" style="background:#4f81bd;padding: 3px 4px;width:30px;height: 14px;text-align:center;border-radius:10px;font-size: 13px;">
+									管理</span>
+								<%} else if ("S".equals(dto.getUser_owner_flg())) {%>
+									<span class="label label-success" style="background:#9bbb59;padding: 3px 4px;width:30px;height: 14px;text-align:center;border-radius:10px;font-size: 13px;">
+									业务</span>
+								<%} else if ("F".equals(dto.getUser_owner_flg())) {%>
+									<span class="label label-warning" style="background:#f79646;padding: 3px 4px;width:30px;height: 14px;text-align:center;border-radius:10px;font-size: 13px;">
+									财务</span>
+								<%} %>
+							</a>
+						</li>
+					</ul>
+					<ul class="nav pull-right navi">
+						<li class=""><a href="<%=basePath%>loginAction?method=main">返回主菜单</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+

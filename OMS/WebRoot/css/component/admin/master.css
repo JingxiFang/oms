@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+
+.search-bar {
+	width:100%;
+	border-bottom: 1px solid #0088CC;
+}
+.search-bar:after {
+	height:0;
+	content:"";
+	clear:both;
+	display:block;
+}
+.search-bar span {
+	float:right;
+}
+.top-btn-bar {
+	float: right;
+	margin-right: 10px;
+}
+.top-btn-bar:after {
+	height:0;
+	content:"";
+	clear:both;
+	display:block;
+}
+.search-result-content {
+	padding:10px;
+}
+.search-result-content > table {
+	background-color: #E4F4CB;
+	width: 100%;
+}

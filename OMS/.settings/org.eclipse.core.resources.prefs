@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//WebRoot/js/common/datepicker.js=UTF-8
+encoding//WebRoot/js/component/invoiceInsert.js=UTF-8
+encoding//WebRoot/js/component/orderUpdate.js=UTF-8
+encoding//WebRoot/pages/common/header=UTF-8
+encoding//WebRoot/pages/component/order/orderConfirm.jsp=UTF-8
+encoding//WebRoot/pages/component/order/orderContrast.jsp=UTF-8
+encoding//WebRoot/pages/component/order/orderInfo.jsp=UTF-8
+encoding//WebRoot/pages/component/order/orderUpdate.jsp=UTF-8
+encoding//src/sym/common/dto=GBK

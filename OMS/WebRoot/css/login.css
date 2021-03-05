@@ -1,0 +1,347 @@
+@charset "utf-8";
+/* css reset */
+body {
+	background: #fff;
+	font-size: 12px;
+	line-height: 166.6%;
+	text-align: center;
+	heigh: 768px;
+	width: 100%;
+	/* background: #FFFFFF url('../images/bg_1.jpg') fixed; */
+	color: #000;
+}
+
+body,input,select,button {
+	font-family: Microsoft Yahei, "MS UI Gothic";
+}
+
+h1,h2,h3,select,input,button {
+	font-size: 100%
+}
+
+body,h1,h2,h3,ul,li,form,p,img {
+	margin: 0;
+	padding: 0;
+	border: 0
+}
+
+input,button,select,img {
+	margin: 0;
+	line-height: normal
+}
+
+select {
+	padding: 1px
+}
+
+ul {
+	list-style: none
+}
+
+select,input,button,button img,label {
+	vertical-align: middle
+}
+
+header,footer,section,aside,nav,hgroup,figure,figcaption {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: none
+}
+
+a {
+	text-decoration: none;
+	color: #959595
+}
+
+a:hover {
+	color: #626262
+}
+
+.fontWeight {
+	font-weight: 700;
+}
+/* global */
+.unvisi {
+	visibility: hidden
+}
+/* backgroundImage */
+.themeCtrl a,.loginFormIpt,.headerIntro,.loginIcoCurrent,.loginIcoNew,.themeText li,.domain,.whatAutologin,.btn,.dialogbox .hd .rc,.dialogbox .hd,.btn-moblogin,.btn-moblogin2,.ico,.locationTestTitle,.verSelected,.servSelected,.locationTestTitleClose,.ext-4free,#extText li,#extMobLogin li,#mobtips_arr,#mobtips_close
+	{
+	background-image: url("../images/bg.png")
+}
+
+/* ico */
+.ico-uid {
+	width: 14px;
+	height: 16px;
+	background-position: -169px -64px
+}
+
+.ico-pwd {
+	width: 14px;
+	height: 16px;
+	background-position: -193px -64px
+}
+
+/* main */
+.main {
+	height: 600px;
+	background: #fff;
+	position: relative;
+	min-width: 1000px;
+}
+
+.main-inner {
+	width: 1000px;
+	height: 600px;
+	overflow: visible;
+	margin: 0 auto;
+	position: relative;
+	clear: both
+}
+
+.login {
+	width: 295px;
+	height: 392px;
+	padding: 13px 14px 15px;
+	top: 150px;
+	left: 60%;
+	text-align: left;
+	position: absolute;
+	z-index: 2;
+	background: url("../images/login.png") no-repeat;
+	-background-image: url("../images/login_ie6.png");
+	position: absolute;
+	z-index: 2;
+	background: url("../images/login.png") no-repeat;
+	-background-image: url("../images/login_ie6.png");
+	position: absolute;
+	z-index: 2;
+	background: url("../images/login.png") no-repeat;
+	-background-image: url("../images/login_ie6.png");
+}
+
+.loginFunc {
+	width: 100%;
+	height: 47px;
+	overflow: hidden;
+	clear: both;
+}
+
+.loginFuncNormal,.loginFuncMobile {
+	width: 147px;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	line-height: 46px;
+	float: left;
+	font-size: 14px;
+	text-align: center; +
+	line-height: 48px;
+	color: #626262;
+	cursor: pointer;
+}
+
+/* form */
+.loginForm {
+	position: relative;
+	height: 313px;
+	padding-top: 40px;
+}
+
+.loginFormIpt {
+	position: relative;
+	width: 240px;
+	height: 42px;
+	line-height: 42px;
+	margin: 0 0 20px 25px;
+	padding-right: 5px;
+	clear: both;
+	border-radius: 4px;
+	background-position: 0 -352px;
+}
+
+.loginFormIpt .ico {
+	position: absolute;
+	left: 9px;
+	top: 13px;
+	z-index: 1;
+}
+
+.loginFormIpt-over {
+
+}
+
+.loginFormIpt-focus {
+	box-shadow: 0 0 5px rgba(40, 195, 15, .5);
+}
+
+.loginFormIpt-focus .placeholder {
+	color: #C9C9C9;
+}
+
+.loginFormBtn {
+	position: relative;
+	width: 245px;
+	height: 43px;
+	margin: 18px 0 0 25px
+}
+
+.loginFormTdIpt {
+	width: 205px;
+	padding: 9px 0 10px;
+	ime-mode: disabled;
+	height: 21px;
+	top: 1px;
+	left: 28px;
+	font-size: 14px;
+	font-weight: 700;
+	border: none;
+	font-family: Microsoft Yahei, "MS UI Gothic";
+	line-height: 21px;
+	color: #92a4bf;
+	background: transparent !important;
+}
+
+.loginFormTdIpt:focus {
+	outline: 0;
+}
+
+.loginFormTdIpt-focus {
+	color: #333;
+	font-weight: 700;
+}
+
+.showPlaceholder .placeholder {
+	visibility: visible;
+	cursor: text;
+}
+
+.placeholder {
+	color: #C9C9C9;;
+	font-size: 14px;
+	position: absolute;
+	left: 30px;
+	top: 14px;
+	line-height: 14px;
+	visibility: hidden;
+	background: none;
+}
+
+#idInputTest {
+	visibility: hidden;
+	float: left;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.loginFormCheck {
+	height: 13px;
+	line-height: 13px;
+	color: #555;
+	margin: 15px 0 0 25px;
+	clear: both;
+	width: 245px;
+	position: relative;
+	z-index: 1;
+}
+
+.loginFormCheckInner {
+	height: 14px;
+	width: 150px;
+	float: left;
+}
+
+.forgetPwdLine {
+	text-align: right
+}
+
+#remAutoLogin {
+	visibility: hidden;
+	position: absolute;
+	left: 0;
+}
+
+.ico-checkbox {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	background-position: -40px -160px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.autoLogin-checked .ico-checkbox {
+	background-position: -40px -180px;
+}
+
+#remAutoLoginTxt {
+	color: #626262;
+}
+
+.forgetPwd {
+	color: #DD3333;
+}
+
+#remAutoLoginTxt:hover,.forgetPwd:hover {
+	color: #626262;
+}
+
+.loginFormCbx {
+	width: 13px;
+	height: 13px;
+	padding: 0;
+	overflow: hidden;
+	margin: 0;
+}
+
+.btn {
+	width: 110px;
+	height: 38px;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	border: 0;
+	padding: 0;
+	font-weight: 700;
+	font-size: 14px;
+	display: inline-block;
+	vertical-align: baseline;
+	line-height: 38px;
+	outline: 0;
+	background-color: transparent;
+	border-radius: 3px;
+}
+
+.btn-login {
+	background-position: 0 -208px;
+	color: #fff;
+	box-shadow: 0 2px 5px rgba(0, 94, 21, .3)
+}
+
+.btn-login-hover {
+	background-position: 0 -256px;
+}
+
+.btn-login-active {
+	background-position: 0 -304px;
+	color: #b1dab9;
+}
+
+.btn-reg {
+	background-position: -117px -208px;
+	color: #5c7a5c;
+	float: right;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
+}
+
+.loginFormBtn .btn-reg-hover {
+	background-position: -117px -256px;
+	color: #279c3b
+}
+
+.loginFormBtn .btn-reg-active {
+	background-position: -117px -304px;
+	color: #5c7a5c
+}

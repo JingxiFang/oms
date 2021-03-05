@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="ie6 ie"><![endif]-->
+<!--[if IE 7]><html class="ie7 ie"><![endif]-->
+<!--[if IE 8]><html class="ie8 ie"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="ja" class="">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<!--script frontend-->
+<script type="text/javascript"
+	src="../../../js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/lib/jquery_plugin/bs/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/lib/jquery_plugin/placeholder/jquery.placeholder.js"></script>
+<script src="../../../js/common/datepicker.js"></script>
+<script type="text/javascript"
+	src="../../../js/lib/jquery_plugin/ui/jquery-ui.js"></script>
+<script type="text/javascript" src="../../../js/common/popup.js"></script>
+<script type="text/javascript"
+	src="../../../js/lib/jquery_alert/jquery.alerts.js"></script>
+<link id="icon" href="../../../images/s.ico" rel="icon">
+<!--script 〓system-->
+
+<!--styles common-->
+<link href="../../../js/lib/jquery_plugin/bs/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="../../../js/lib/jquery_plugin/bs/css/bootstrap-responsive.css"
+	rel="stylesheet" type="text/css">
+<link href="../../../css/common/bootstrap_setup.css" rel="stylesheet"
+	type="text/css">
+<link href="../../../js/lib/jquery_plugin/ui/jquery-ui.css"
+	rel="stylesheet" type="text/css">
+<link href="../../../css/common/common.css" rel="stylesheet"
+	type="text/css">
+<link href="../../../css/common/popup.css" rel="stylesheet"
+	type="text/css">
+<link href="../../../css/common/datepicker.css" rel="stylesheet">
+<link href="../../../js/lib/jquery_alert/jquery.alerts.css"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	var submitS = '确定';
+	var cancelC = '取消';
+	var key = 0;
+	$(document).ready(function() {
+
+		$("#test01").DatePicker();
+
+		$("#test01").val('');
+		$("#test02").val('');
+		$(document).on('click', '#money td', function(e) {
+			if (key == 0) {
+				$('.row-select').removeClass('row-select');
+			}
+			$(this).parent().addClass('row-select');
+
+		});
+		$(window).keydown(function(e) {
+			if (e.ctrlKey) {
+				key = 1;
+			}
+		});
+		$(window).keyup(function() {
+			key = 0;
+		});
+	});
+
+	function deleteContract(el) {
+		jConfirm('确认删除吗？', '确认对话框', function(r) {
+			if (r == true) {
+				$(el).parent().parent().remove();
+			}
+		});
+	}
+
+	function add() {
+		console.log(key);
+		var array = [
+				'<tr ondblclick="updateContract()">',
+				'<td style="width:20%;text-align:center;">附件</td>',
+				'<td class="right_align" style="width:40%;">999,111.00</td>',
+				'<td style="width:20%;text-align:center;">2014/02/09</td>',
+				'<td style="width:20%;text-align:center;" class="center_td"><a class="icon icon-edit" id="update_btn_row" onclick="updateContract()">编辑</a>&nbsp;&nbsp;<a class="icon icon-remove" onclick="deleteContract(this);">删除</a></td>',
+				'</tr>' ];
+		var tr = $(array.join());
+		tr.appendTo($('#money tbody'));
+
+	}
+	function addContract() {
+		var param = {
+			width : 400,
+			height : 250,
+			title : "增加",
+			modal : true,
+			buttons : [ {
+				text : '增加',
+				click : function() {
+					add();
+					$(this).dialog('close');
+				},
+				'class' : 'btn btn-primary btn-middle'
+			}, {
+				text : '取消',
+				click : function() {
+					$(this).dialog('close');
+				},
+				'class' : 'btn btn-inverse btn-middle btn-aft-middle'
+			} ]
+		};
+		clearInput();
+		openPop('product_dialog', param);
+	}
+	function updateContract() {
+		var param = {
+			width : 400,
+			height : 250,
+			title : "编辑",
+			modal : true,
+			buttons : [ {
+				text : '确定',
+				click : function() {
+					$(this).dialog('close');
+				},
+				'class' : 'btn btn-primary btn-middle'
+			}, {
+				text : '取消',
+				click : function() {
+					$(this).dialog('close');
+				},
+				'class' : 'btn btn-inverse btn-middle btn-aft-middle'
+			} ]
+		};
+		editInput();
+		openPop('product_dialog', param);
+	}
+	function clearInput() {
+		$('#input02').val('');
+		$("#test01").val('');
+	}
+
+	function editInput() {
+		$('#input02').val('999,111.00');
+		$("#test01").val('2013/01/01');
+	}
+
+	function paymentsOver() {
+		jConfirm('回款结束后，回款日期回款金额不能再进行编辑，是否继续本次操作?', '确认对话框', function(r) {
+			if (r == true) {
+				$('#addProduct').removeAttr("onclick");
+				$('#money tbody tr').removeAttr("ondblclick");
+				$('.icon-remove').removeAttr("onclick");
+				$('.icon-edit').removeAttr("onclick");
+				$('#clear_input').remove();
+				var html = "<font color='red'>该订单已经回款结束</font>";
+				$('#addProductDiv').prepend(html);
+
+				$('#addProduct').hide();
+				$("#moneyTitle tr th:eq(3)").remove();
+				$(".center_td").remove();
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<!--▼▼▼header▼▼▼-->
+	<header>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<div class="container">
+					<button data-target=".nav-collapse" data-toggle="collapse"
+						class="btn btn-navbar" type="button">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<!--logo-->
+					<ul class="nav nav-pills logo">
+						<li><a class="logo" href="../../menu/mainMenuG.html"
+							style="padding: 0px;"> <img alt=""
+								src="../../../images/logo.png"><span
+								style="padding-left: 10px; padding-top: 10px; padding-bottom: 5px; color: #EEEEEE; font-size: 23px; font-weight: bold; vertical-align: middle;">订单管理系统</span>
+						</a></li>
+					</ul>
+					<!--navi-->
+					<div class="nav-collapse collapse">
+						<ul class="nav pull-right user">
+							<li class="dropdown"><a data-toggle="dropdown"
+								class="dropdown-toggle" href="#"> <i
+									class="icon-user icon-white unit"></i>张三<b class="caret"></b>
+							</a>
+								<ul class="dropdown-menu" style="z-index: 1000000;">
+									<li><a href="../../common/resetPassword.html">修改密码</a></li>
+									<li class="divider"></li>
+									<li><a href="../../login.html">退出系统</a></li>
+								</ul></li>
+							<li class="" style="border-left-width: 0px;"><a class=""
+								style="border-left-width: 0px;" data-toggle="dropdown" href="#">
+									<span class="label label-info"
+									style="background: #4f81bd; padding: 3px 4px; width: 30px; height: 14px; text-align: center; border-radius: 10px; font-size: 13px;">管理</span>
+							</a></li>
+						</ul>
+						<ul class="nav pull-right navi">
+							<li class=""><a href="../../menu/mainMenuG.html">返回主菜单</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!--▼▼▼search▼▼▼-->
+	<div class="container-fluid search disabled">
+		<div class="row-fluid"></div>
+	</div>
+	<!--▼▼▼contents(field type)▼▼▼-->
+	<div class="main">
+		<div class="banner">
+			<span>实际回款录入</span>
+		</div>
+		<div class="content">
+			<div class="edit-content"
+				style="border-top: 1px solid #0088CC; padding-top: 10px;">
+				<div style="width: 80%; margin: 0 auto;">
+					<table class="edit-table" style="width: 800px;">
+						<tr>
+							<td class="right_align">合同号&nbsp;:&nbsp;</td>
+							<td>
+								<div style="margin-bottom: 8px;">
+									<input class="input-xlarge" disabled type="text"
+										style="margin-bottom: 0px; width: 120px; ime-mode: disabled"
+										value="ABC000000001">
+									－
+									<input class="input-xlarge" type="text" disabled
+										style="margin-bottom: 0px; width: 30px;; ime-mode: disabled"
+										value="001">
+								</div>
+							</td>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td class="right_align">业务员&nbsp;:&nbsp;</td>
+							<td colspan="3">
+								<table>
+									<tr>
+										<td><input type="text" disabled
+											style="margin-bottom: 5px; width: 120px;" id="user_name"
+											value="李四"></input></td>
+										<td>&nbsp;&nbsp;&nbsp;&nbsp; <span>代理商&nbsp;:&nbsp;</span>
+										</td>
+										<td>
+											<div style="display: inline; margin-left: 3px; width: 100px;">
+												<input type="text" disabled style="width: 40px;"
+													id="agency_id" value="0001"></input> <label
+													style="display: inline; margin-left: 3px;" id="agency_name">某市总代理</label>
+											</div>
+										</td>
+									</tr>
+								</table>
+						</tr>
+						<tr>
+							<td class="right_align">客户类别&nbsp;:&nbsp;</td>
+							<td colspan="3"><input value="国网" type="text" disabled
+								style="width: 60px;"></input></td>
+						</tr>
+						<tr>
+							<td class="right_align">客户名称&nbsp;:&nbsp;</td>
+							<td colspan="3">
+								<div style="display: inline;">
+									<input type="text" disabled style="width: 300px;"
+										id="customer_name" value="某市国家电网"></input>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="right_align">项目名称&nbsp;:&nbsp;</td>
+							<td colspan="3"><input id="input01" disabled class=""
+								type="text" style="margin-bottom: 5px; width: 300px;"
+								value="项目1"></td>
+						</tr>
+						<tr>
+							<td class="right_align">回款比例&nbsp;:&nbsp;</td>
+							<td colspan="3">
+								<table style="width: 90%">
+									<tr>
+										<td><input id="input01" class="" value="10" type="text"
+											style="margin-bottom: 0; width: 45px;" disabled> :</td>
+										<td><input id="input01" class="" value="10" type="text"
+											style="margin-bottom: 0; width: 45px;" disabled> :</td>
+										<td><input id="input01" class="" value="10" type="text"
+											style="margin-bottom: 0; width: 45px;" disabled> :</td>
+										<td><input id="input01" class="" value="10" type="text"
+											style="margin-bottom: 0; width: 45px;" disabled> :</td>
+										<td><input id="input01" class="" value="10" type="text"
+											style="margin-bottom: 0; width: 45px;" disabled> :</td>
+										<td><input id="input01" class="" value="50" type="text"
+											style="margin-bottom: 0; width: 45px;" disabled>
+											&nbsp;</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="right_align">预计回款月&nbsp;:&nbsp;</td>
+							<td colspan="3">
+								<table style="width: 90%">
+									<tr>
+										<td><input id="input01" class="" value="201401"
+											type="text" style="margin-bottom: 0; width: 90px;" disabled>
+										</td>
+										<td><input id="input01" class="" value="201402"
+											type="text" style="margin-bottom: 0; width: 90px;" disabled>
+										</td>
+										<td><input id="input01" class="" value="201403"
+											type="text" style="margin-bottom: 0; width: 90px;" disabled>
+										</td>
+										<td><input id="input01" class="" value="201404"
+											type="text" style="margin-bottom: 0; width: 90px;" disabled>
+										</td>
+										<td><input id="input01" class="" value="201405"
+											type="text" style="margin-bottom: 0; width: 90px;" disabled>
+										</td>
+										<td><input id="input01" class="" value="201406"
+											type="text" style="margin-bottom: 0; width: 90px;" disabled>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="right_align">预计回款金额&nbsp;:&nbsp;</td>
+							<td colspan="3">
+								<table style="width: 90%">
+									<tr>
+										<td><input id="input01" class="" type="text"
+											style="width: 90px;" disabled></td>
+										<td><input id="input01" class="" type="text"
+											style="width: 90px;" disabled></td>
+										<td><input id="input01" class="" type="text"
+											style="width: 90px;" disabled></td>
+										<td><input id="input01" class="" type="text"
+											style="width: 90px;" disabled></td>
+										<td><input id="input01" class="" type="text"
+											style="width: 90px;" disabled></td>
+										<td><input id="input01" class="" type="text"
+											style="width: 90px;" disabled></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="right_align">合同总价&nbsp;:&nbsp;</td>
+							<td><input id="" class="" type="text" style="width: 150px;"
+								disabled></td>
+						</tr>
+						<tr>
+							<td class="right_align">已回款总额&nbsp;:&nbsp;</td>
+							<td><input id="" class="" type="text" style="width: 150px;"
+								disabled></td>
+						</tr>
+						<tr>
+							<td class="right_align">回款率&nbsp;:&nbsp;</td>
+							<td><input type="text"
+								style="margin-bottom: 10px; width: 60px; text-align: right; ime-mode: disabled"
+								disabled>&nbsp;<label style="display: inline;"">%</label></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div
+				style="width: 900px; padding-top: 10px; margin: 0 auto; border-top: 1px solid #0088CC;">
+				<div style="width: 820px; margin: 0 auto;">
+					<div id="addProductDiv">
+						<!-- <div style="float:left;margin-left:50px">回款结束<input id="over" type="checkbox" style="margin-left:10px"></div> -->
+						<a id="clear_input" class="btn btn-warning btn-small"
+							style="margin-left: 40px; margin-bottom: 5px"
+							title="回款结束后，回款日期回款金额不能再进行编辑" onclick="paymentsOver()">回款结束</a>
+						<div style="float: right;">
+							<a id="addProduct" class="icon icon-add" title=""
+								style="margin-right: 20px" onclick="addContract()">增加</a>
+						</div>
+						<div style="clear: both;"></div>
+					</div>
+					<table class="table table-striped table-bordered  table-title"
+						style="margin-bottom: 0px; width: 800px;" id="moneyTitle">
+						<thead>
+							<tr>
+								<th style="width: 20%; text-align: center;">制品区分</th>
+								<th style="width: 40%;">回款金额</th>
+								<th style="width: 20%; height: 21px;">回款日期</th>
+								<th style="width: 20%; text-align: center;">
+							</tr>
+						</thead>
+					</table>
+					<div
+						style="width: 820px; height: 165px; overflow-y: auto; margin: 0 auto;">
+						<table id="money"
+							class="table table-striped table-bordered table-body"
+							style="background-color: #E4F4CB; width: 800px;">
+							<tbody>
+								<tr ondblclick="updateContract()">
+									<td style="width: 20%; text-align: center;">电缆</td>
+									<td class="right_align" style="width: 40%;">999,111.00</td>
+									<td style="width: 20%; text-align: center;">2014/02/05</td>
+									<td style="width: 20%; text-align: center;" class="center_td">
+										<a class="icon icon-edit" id="update_btn_row"
+										onclick="updateContract()">编辑</a>&nbsp;&nbsp; <a
+										class="icon icon-remove" onclick="deleteContract(this)">删除</a>
+									</td>
+								</tr>
+								<tr ondblclick="updateContract()">
+									<td style="width: 20%; text-align: center;">电缆</td>
+									<td class="right_align" style="width: 40%;">999,111.00</td>
+									<td style="width: 20%; text-align: center;">2014/02/05</td>
+									<td style="width: 20%; text-align: center;" class="center_td">
+										<a class="icon icon-edit" id="update_btn_row"
+										onclick="updateContract()">编辑</a>&nbsp;&nbsp; <a
+										class="icon icon-remove" onclick="deleteContract(this)">删除</a>
+									</td>
+								</tr>
+								<tr ondblclick="updateContract()">
+									<td style="width: 20%; text-align: center;">电缆</td>
+									<td class="right_align" style="width: 40%;">999,111.00</td>
+									<td style="width: 20%; text-align: center;">2014/02/05</td>
+									<td style="width: 20%; text-align: center;" class="center_td">
+										<a class="icon icon-edit" id="update_btn_row"
+										onclick="updateContract()">编辑</a>&nbsp;&nbsp; <a
+										class="icon icon-remove" onclick="deleteContract(this);">删除</a>
+									</td>
+								</tr>
+								<tr ondblclick="updateContract()">
+									<td style="width: 20%; text-align: center;">电缆</td>
+									<td class="right_align" style="width: 40%;">999,111.00</td>
+									<td style="width: 20%; text-align: center;">2014/02/05</td>
+									<td style="width: 20%; text-align: center;" class="center_td">
+										<a class="icon icon-edit" id="update_btn_row"
+										onclick="updateContract()">编辑</a>&nbsp;&nbsp; <a
+										class="icon icon-remove" onclick="deleteContract(this);">删除</a>
+									</td>
+								</tr>
+								<tr ondblclick="updateContract()">
+									<td style="width: 20%; text-align: center;">电缆</td>
+									<td class="right_align" style="width: 40%;">999,111.00</td>
+									<td style="width: 20%; text-align: center;">2014/02/05</td>
+									<td style="width: 20%; text-align: center;" class="center_td">
+										<a class="icon icon-edit" id="update_btn_row"
+										onclick="updateContract()">编辑</a>&nbsp;&nbsp; <a
+										class="icon icon-remove" onclick="deleteContract(this);">删除</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom_block">
+			<a class="btn btn-info btn-middle" style="" href="paymentSearch.html">返回</a>
+		</div>
+	</div>
+	<div id="product_dialog" style="display: none;">
+		<div style="margin-top: 10px;">
+			<table class="table-edit table-striped table-bordered">
+				<tr>
+					<td class="right_align">制品区分&nbsp;:&nbsp;</td>
+					<td><label class="radio inline"> <input id="payment01"
+							name="payment_dif" class="right_align" type="radio"
+							checked="checked"> 电缆
+					</label>&nbsp;&nbsp; <label class="radio inline"> <input
+							id="payment02" name="payment_dif" class="right_align"
+							type="radio"> 附件
+					</label></td>
+				</tr>
+				<tr>
+					<td class="right_align">回款日期&nbsp;:&nbsp;</td>
+					<td><input id="test01" class="must" type="text"
+						style="width: 80px; margin-bottom: 3px;"></td>
+				</tr>
+				<tr>
+					<td class="right_align">回款金额&nbsp;:&nbsp;</td>
+					<td><input id="input02" class="right_align must" type="text"
+						style="width: 180px;"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

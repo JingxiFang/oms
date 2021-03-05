@@ -1,0 +1,17 @@
+@charset "utf-8";
+.p_sel_year {
+	cursor: pointer;
+	border: 1px solid #EAF7EF;
+}
+.p_sel_month {
+	cursor: pointer;
+	border: 1px solid #EAF7EF;
+}
+.sel_month {
+	background-color: #DDECFE;
+	border: 1px solid #8DB2E3;
+}
+.sel_year {
+	background-color: #DDECFE;
+	border: 1px solid #8DB2E3;
+}

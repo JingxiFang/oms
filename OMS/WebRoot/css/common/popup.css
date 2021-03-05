@@ -1,0 +1,37 @@
+@charset "utf-8";
+.pop-dialog {
+	display:none;
+}
+.ui-dialog .ui-dialog-titlebar {
+	margin : -3px -3px 3px -3px;
+	position: relative;
+	border:none;
+	background-image:none;
+	background-color: #38AFE5 !important;
+	border-bottom: 1px solid #EEEEEE !important;
+	padding: 8px 15px !important;
+	border-radius: 4px 4px 0 0;
+	color: #FFFFFF;
+
+	border-bottom: 1px solid #EEEEEE;
+}
+.ui-dialog .ui-dialog-title {
+	padding: 3px 6px;
+	font-size: 20px;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset{
+	float: none !important;
+	text-align: center;
+}
+.ui-dialog .ui-dialog-buttonpane {
+	background: none repeat scroll 0 0 #ECF5FA !important;
+	border-bottom: 1px dotted #828384 !important;
+	border-top: 1px dotted #828384 !important;
+	margin-top: 0.5em !important;
+	padding: 0 !important;
+
+}
+.ui-widget {
+	font-family: Microsoft Yahei, "MS UI Gothic";
+	font-size: 13px;
+}
